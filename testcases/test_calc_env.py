@@ -26,11 +26,6 @@ def get_test_data(env):
 
 
 class TestCalc:
-    # @pytest.mark.hogwarts
-    # @pytest.mark.parametrize('a,b,expect', get_test_data(os.environ['host'])[0], ids=get_test_data(os.environ['host'])[1])
-    # def test_add(self, get_calc, host, a, b, expect):
-    #     result = get_calc.add(a, b)
-    #     assert result == expect
 
     @pytest.mark.hogwards
     def test_add_env(self, get_calc, host):
@@ -50,5 +45,11 @@ class TestCalc:
             print('计算过程：{0} + {1} ？ {2}'.format(data[0], data[1], result))
             assert result == data[2]
 
-# if __name__ == '__main__':
-#     pytest.main(['-v', '-s', 'test_calc_env.py', '--env=dev'])
+    # @pytest.mark.hogwarts
+    # @pytest.mark.parametrize('a,b,expect', get_test_data(os.environ['host'])[0], ids=get_test_data(os.environ['host'])[1])
+    # def test_add(self, get_calc, host, a, b, expect):
+    #     result = get_calc.add(a, b)
+    #     assert result == expect
+
+if __name__ == '__main__':
+    pytest.main(['-v', '-s', 'test_calc_env.py', '--env=dev'])

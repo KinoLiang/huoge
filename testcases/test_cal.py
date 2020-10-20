@@ -12,25 +12,6 @@ from pythoncode.calculator import Calculator
 class TestCal:
     #使用fixture环境初始化
 
-    '''
-    def setup(self):
-    # 用例执行前初始化
-        print('计算开始')
-
-    def teardown(self):
-        # 用例执行结束
-        print('计算结束')
-
-    def setup_class(self):
-        # 测试类执行初始化
-        print('开始执行用例')
-        # 初始化计算器
-        self.cal = Calculator()
-
-    def teardown_class(self):
-        # 测试类执行完毕
-        print('用例执行结束')
-    '''
 
 
     # 加法用例设计
@@ -69,7 +50,7 @@ class TestCal:
     # 除法用例设计
     @allure.title('除法用例')
     @pytest.mark.run(order=4)  # 添加运行顺序
-    @pytest.mark.hogwards
+    @pytest.mark.smoketest
     @pytest.mark.parametrize('a,b,expect',[
         [54,6,9],[120000,500,240],[340,3.4,100],[15,-1.5,-10]
     ],ids=['int_case','big_case','fload_case','minus_case'])
@@ -80,7 +61,7 @@ class TestCal:
     # 除法异常场景
     @allure.title('除法异常场景用例')
     @pytest.mark.run(order=4)  # 添加运行顺序
-    @pytest.mark.smoketest
+    @pytest.mark.hogwards
     @pytest.mark.parametrize('a,b', [[1, 0]], ids=['error_case'])
     def test_div(self, get_calc, a, b):
         with pytest.raises(ZeroDivisionError):
@@ -92,7 +73,7 @@ if __name__ == '__main__':
     xml_path = os.path.join(proDir,r'report\xml')
     html_path = os.path.join(proDir,r'report\html')
     #添加'--clean-alluredir'则可去除历史报告数据
-    pytest.main(['-s', '-v', 'test_cal.py', '-m smoketest', '--alluredir', xml_path])
+    pytest.main(['-s', '-v', 'test_cal.py', '-m systemtest', '--alluredir', xml_path])
     time.sleep(1)
     #os.system(r'allure generate {0} -o {1} --clean'.format(xml_path, html_path))
     #os.system(r'allure open {}'.format(html_path))
